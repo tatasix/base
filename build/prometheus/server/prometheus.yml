@@ -8,82 +8,46 @@ scrape_configs:
     scrape_interval: 5s  #global catch time
     static_configs:
       - targets: ['127.0.0.1:9090']
-
-  - job_name: 'order-api'
+  - job_name: 'knowledge'
     static_configs:
-      - targets: [ 'looklook:4001' ]
+      - targets: [ 'knowledge:8884' ]
         labels:
-          job: order-api
-          app: order-api
+          job: knowledge
+          app: knowledge
           env: dev
-  - job_name: 'order-rpc'
+  - job_name: 'wellness'
     static_configs:
-      - targets: [ 'looklook:4002' ]
+      - targets: [ 'wellness:8872' ]
         labels:
-          job: order-rpc
-          app: order-rpc
+          job: wellness
+          app: wellness
           env: dev
-  - job_name: 'order-mq'
+  - job_name: 'chat'
     static_configs:
-      - targets: [ 'looklook:4003' ]
+      - targets: [ 'chat:8888' ]
         labels:
-          job: order-mq
-          app: order-mq
+          job: chat
+          app: chat
           env: dev
-  - job_name: 'payment-api'
+  - job_name: 'ding'
     static_configs:
-      - targets: [ 'looklook:4004' ]
+      - targets: [ 'ding:8885' ]
         labels:
-          job: payment-api
-          app: payment-api
+          job: ding
+          app: ding
           env: dev
-  - job_name: 'payment-rpc'
+  - job_name: 'payment'
     static_configs:
-      - targets: [ 'looklook:4005' ]
+      - targets: [ 'payment:8882' ]
         labels:
-          job: payment-rpc
-          app: payment-rpc
+          job: payment
+          app: payment
           env: dev
-  - job_name: 'travel-api'
+  - job_name: 'sms'
     static_configs:
-      - targets: [ 'looklook:4006' ]
+      - targets: [ 'sms:8889' ]
         labels:
-          job: travel-api
-          app: travel-api
-          env: dev
-  - job_name: 'travel-rpc'
-    static_configs:
-      - targets: [ 'looklook:4007' ]
-        labels:
-          job: travel-rpc
-          app: travel-rpc
-          env: dev
-  - job_name: 'usercenter-api'
-    static_configs:
-      - targets: ['looklook:4008']
-        labels:
-          job: usercenter-api
-          app: usercenter-api
-          env: dev
-  - job_name: 'usercenter-rpc'
-    static_configs:
-      - targets: ['looklook:4009']
-        labels:
-          job: usercenter-rpc
-          app: usercenter-rpc
-          env: dev
-  - job_name: 'mqueue-job'
-    static_configs:
-      - targets: [ 'looklook:4010' ]
-        labels:
-          job: mqueue-job
-          app: mqueue-job
-          env: dev
-  - job_name: 'mqueue-scheduler'
-    static_configs:
-      - targets: [ 'looklook:4011' ]
-        labels:
-          job: mqueue-scheduler
-          app: mqueue-scheduler
+          job: sms
+          app: sms
           env: dev
 

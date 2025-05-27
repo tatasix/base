@@ -1,0 +1,17 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: 'default'
+
+receivers:
+  - name: 'default'
+    email_configs:
+      - to: '1933559078@qq.com'
+        from: 'service@dingdangeducation.com'
+        smarthost: 'gz-smtp.qcloudmail.com:465'
+        auth_username: 'service@dingdangeducation.com'
+        auth_password: 'T5KIX7aYw9'
+        require_tls: true
+
+

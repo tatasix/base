@@ -30,3 +30,12 @@ build/milvus
 build/minio
 build/mysql/data
 build/redis/data
+
+# Monitoring data directories
+data/prometheus/data/
+data/grafana/data/
+data/alertmanager/data/
+
+# Log files
+*.log
+logs/
