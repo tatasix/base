@@ -35,17 +35,19 @@ services:
     volumes:
         - ./data/grafana/data:/var/lib/grafana
     ports:
-        - "8875:3000"
+        - "8891:3000"
     networks:
         - chatgpt-wechat_network
   alertmanager:
     image: prom/alertmanager:latest
     container_name: alertmanager
+    hostname: alertmanager
     volumes:
       - ./build/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
       - ./build/alertmanager/data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--cluster.advertise-address=0.0.0.0:9093'
     ports:
       - "9093:9093"
     networks:
