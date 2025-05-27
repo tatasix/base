@@ -47,7 +47,7 @@ services:
       - ./build/alertmanager/data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
-      - '--cluster.advertise-address=0.0.0.0:9093'
+      - '--cluster.advertise-address=alertmanager:9093'
     ports:
       - "9093:9093"
     networks:
