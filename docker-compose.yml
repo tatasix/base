@@ -44,7 +44,7 @@ services:
     hostname: alertmanager
     volumes:
       - ./build/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
-      - ./build/alertmanager/data:/alertmanager
+      - ./data/alertmanager/data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--cluster.advertise-address=alertmanager:9093'
