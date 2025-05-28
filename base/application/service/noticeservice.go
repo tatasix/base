@@ -45,11 +45,11 @@ func (s *NoticeService) SendNotice(ctx context.Context) error {
 	//发送短信
 	go func() {
 		defer wg.Done()
-		err := s.messageService.SendNotice(ctx)
-		if err != nil {
-			logger.Errorf("SendNotice error: %v", err)
-			return
-		}
+		// err := s.messageService.SendNotice(ctx)
+		// if err != nil {
+		// 	logger.Errorf("SendNotice error: %v", err)
+		// 	return
+		// }
 		logger.Infof("message SendNotice success")
 	}()
 	wg.Wait()

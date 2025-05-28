@@ -20,20 +20,9 @@ type EmailSender struct {
 
 func (s *EmailSender) SendNotice(ctx context.Context) error {
 	logger := logx.WithContext(ctx)
-
-	// 邮件内容
-	subject := "系统告警"
-	body := fmt.Sprintf(`
-		<html>
-		<body>
-			<h3>您好！</h3>
-			<p>您的系统出现告警，请及时处理。</p>
-		</body>
-		</html>
-	`)
 	tos := s.SvcCtx.Config.Email.To
 	for _, to := range tos {
-		err := s.doSend(ctx, subject, body, to)
+		err := s.doSend(ctx, to)
 		if err != nil {
 			logger.Errorf("发送邮件失败: %v", err)
 			return err
@@ -43,13 +32,27 @@ func (s *EmailSender) SendNotice(ctx context.Context) error {
 	return nil
 }
 
-func (s *EmailSender) doSend(ctx context.Context, to, subject, body string) error {
-	logger := logx.WithContext(ctx)
+func (s *EmailSender) doSend(ctx context.Context, emailTo string) error {
+	logger := logx.WithContext(ctx).WithFields(logx.Field("email", emailTo))
+
+	// 邮件内容
+	subject := "系统告警"
+	body := fmt.Sprintf(`
+		<html>
+		<body>
+			<h3>您好！</h3>
+			<p>您的系统出现告警，请及时处理。</p>
+			<p>您的系统出现告警，请及时处理。</p>
+			<p>您的系统出现告警，请及时处理。</p>
+			<p>如果已处理，请忽略此邮件。</p>
+		</body>
+		</html>
+	`)
 
 	// 构建邮件头
 	headers := make(map[string]string)
 	headers["From"] = s.SvcCtx.Config.Email.From
-	headers["To"] = to
+	headers["To"] = emailTo
 	headers["Subject"] = "=?UTF-8?B?" + base64.StdEncoding.EncodeToString([]byte(subject)) + "?="
 	headers["Content-Type"] = "text/html; charset=UTF-8"
 	headers["MIME-Version"] = "1.0"
@@ -93,7 +96,7 @@ func (s *EmailSender) doSend(ctx context.Context, to, subject, body string) erro
 		return err
 	}
 
-	if err = client.Rcpt(to); err != nil {
+	if err = client.Rcpt(emailTo); err != nil {
 		logger.Errorf("设置收件人失败: %v", err)
 		return err
 	}
@@ -117,5 +120,4 @@ func (s *EmailSender) doSend(ctx context.Context, to, subject, body string) erro
 	}
 	logger.Info("邮件发送成功")
 	return nil
-
 }
