@@ -1,49 +1,64 @@
 global:
-  scrape_interval:
+  scrape_interval: 15s
   external_labels:
     monitor: 'codelab-monitor'
 
+rule_files:
+  - "rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - "alertmanager:9093"
+
 scrape_configs:
   - job_name: 'prometheus'
-    scrape_interval: 5s  #global catch time
+    scrape_interval: 5s
     static_configs:
       - targets: ['127.0.0.1:9090']
   - job_name: 'knowledge'
+    metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'knowledge:8884' ]
+      - targets: [ 'knowledge:8894' ]
         labels:
           job: knowledge
           app: knowledge
           env: dev
   - job_name: 'wellness'
+    metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'wellness:8872' ]
+      - targets: [ 'wellness:8893' ]
         labels:
           job: wellness
           app: wellness
           env: dev
   - job_name: 'chat'
+    metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'chat:8888' ]
+      - targets: [ 'chat:8898' ]
         labels:
           job: chat
           app: chat
           env: dev
   - job_name: 'ding'
+    metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'ding:8885' ]
+      - targets: [ 'ding:8895' ]
         labels:
           job: ding
           app: ding
           env: dev
   - job_name: 'payment'
+    metrics_path: '/metrics'
     static_configs:
-      - targets: [ 'payment:8882' ]
+      - targets: [ 'payment:8892' ]
         labels:
           job: payment
           app: payment
           env: dev
   - job_name: 'sms'
+    metrics_path: '/metrics'
     static_configs:
       - targets: [ 'sms:8889' ]
         labels:

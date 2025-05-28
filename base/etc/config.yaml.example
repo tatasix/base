@@ -1,0 +1,35 @@
+Name: base
+Host: 0.0.0.0
+Port: 8897
+Timeout: 500000
+Mode: dev
+
+Log:
+  stat: false
+  Path: "/var/log/base/"
+  Mode: "console"       # default=console,options=[console,file,volume]
+  Level: "debug"        #    default=info,options=[debug,info,error,severe]
+  KeepDays: 5
+
+Redis:
+  Host: localhost:46379
+  Pass: "123456"
+  Type: node
+  Tls: false
+
+MSG:
+  To: [""]
+  TemplateId: ""
+  Url: ""
+  Key: ""
+  SignName: ""
+
+
+Email:
+  Host: gz-smtp.qcloudmail.com
+  Port: 465
+  Username: 
+  Password: 
+  From: 
+  FrontendURL: 
+  To: []

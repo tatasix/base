@@ -9,6 +9,7 @@ services:
       TZ: Asia/Shanghai
     volumes:
       - ./build/prometheus/server/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./build/prometheus/server/rules.yml:/etc/prometheus/rules.yml
       - ./data/prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -18,7 +19,7 @@ services:
     restart: always
     user: root
     ports:
-      - "9090:9090"
+      - "8892:9090"
     networks:
       - chatgpt-wechat_network
 
@@ -47,12 +48,25 @@ services:
       - ./data/alertmanager/data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
-      - '--cluster.advertise-address=alertmanager:9093'
+      - '--cluster.advertise-address=0.0.0.0:9093'
+      - '--storage.path=/alertmanager'
     ports:
-      - "9093:9093"
+      - "8896:9093"
     networks:
       - chatgpt-wechat_network
     restart: always
+  base:
+    build: ./base
+    restart: always
+    ports:
+      - "8897:8897"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./logs/base:/var/log/base
+      - ./base/etc:/app/etc
+    networks:
+      - chatgpt-wechat_network
 networks:
   chatgpt-wechat_network:
     external: true
