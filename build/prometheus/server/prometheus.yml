@@ -24,7 +24,7 @@ scrape_configs:
         labels:
           job: knowledge
           app: knowledge
-          env: dev
+          env: pro
   - job_name: 'wellness'
     metrics_path: '/metrics'
     static_configs:
@@ -32,7 +32,7 @@ scrape_configs:
         labels:
           job: wellness
           app: wellness
-          env: dev
+          env: pro
   - job_name: 'chat'
     metrics_path: '/metrics'
     static_configs:
@@ -40,7 +40,7 @@ scrape_configs:
         labels:
           job: chat
           app: chat
-          env: dev
+          env: pro
   - job_name: 'ding'
     metrics_path: '/metrics'
     static_configs:
@@ -48,7 +48,7 @@ scrape_configs:
         labels:
           job: ding
           app: ding
-          env: dev
+          env: pro
   - job_name: 'payment'
     metrics_path: '/metrics'
     static_configs:
@@ -56,13 +56,5 @@ scrape_configs:
         labels:
           job: payment
           app: payment
-          env: dev
-  - job_name: 'sms'
-    metrics_path: '/metrics'
-    static_configs:
-      - targets: [ 'sms:8889' ]
-        labels:
-          job: sms
-          app: sms
-          env: dev
+          env: pro
 
