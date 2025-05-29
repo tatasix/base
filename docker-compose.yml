@@ -46,6 +46,7 @@ services:
     volumes:
       - ./build/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
       - ./data/alertmanager/data:/alertmanager
+      - /etc/localtime:/etc/localtime:ro
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--cluster.advertise-address=0.0.0.0:9093'

@@ -7,16 +7,16 @@ WORKDIR /app
 # 启用 Go Modules 并设置国内代理（解决网络问题）
 ENV GOPROXY=https://goproxy.cn,direct
 
+# 新增：安装时区数据并设置时区
+RUN apk add --no-cache tzdata
+ENV TZ=Asia/Shanghai
+
 # 复制 go.mod 和 go.sum 文件（利用 Docker 缓存，避免重复下载依赖）
 COPY go.mod go.sum ./
 RUN go mod download
 
 # 复制整个项目代码
 COPY . .
-
-# 新增：安装时区数据并设置时区
-RUN apk add --no-cache tzdata
-ENV TZ=Asia/Shanghai
 
 # 构建应用
 RUN go build -o main cmd/main.go
