@@ -20,6 +20,9 @@ type Config struct {
 		Url        string   // 短信URL
 		Key        string   // API密钥
 		SignName   string   // 账号
+		Domain     string   // 域名
+		AppId      string   // 应用ID
+		AppSecret  string   // 应用密钥
 	}
 
 	Email struct {

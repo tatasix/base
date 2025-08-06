@@ -3,6 +3,7 @@ module base
 go 1.23.4
 
 require (
+	github.com/bwmarrin/snowflake v0.3.0
 	github.com/google/wire v0.6.0
 	github.com/zeromicro/go-zero v1.8.3
 )

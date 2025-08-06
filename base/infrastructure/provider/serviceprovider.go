@@ -21,7 +21,7 @@ func ProviderNoticeService(svcCtx *svc.ServiceContext, messageService sms.SmsInt
 }
 
 func ProviderMessageService(svcCtx *svc.ServiceContext) sms.SmsInterface {
-	return &sms.Tencent{SvcCtx: svcCtx}
+	return &sms.Sms{SvcCtx: svcCtx}
 }
 
 func ProviderMailService(svcCtx *svc.ServiceContext) mail.MailInterface {
